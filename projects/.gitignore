@@ -1,0 +1,24 @@
+# Vivado generated folders (all rebuildable)
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
+.Xil/
+
+# Vivado logs and journals
+*.jou
+*.log
+*.str
+vivado_pid*.zip
+webtalk*
+
+# Document rule: only the TCL script is committed from work_dir
+**/work_dir/*
+!**/work_dir/vivado_project.tcl
+
+# Vitis workspace clutter
+.metadata/
+.analytics
+RemoteSystemsTempFiles/
