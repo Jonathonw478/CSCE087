@@ -7,10 +7,5 @@
 !hardware/ipi_bds/design_1/hdl/*.v
 !hardware/work_dir/*.tcl
 !software/imported_hardware/*.xsa
-!software/source/*/*.c
-!software/source/*/*.h
-!software/source/*/*.cc
-!software/source/*/*.cpp
-!software/source/*/*.hpp
 !software/hello_world/src/*.c
 !software/hello_world/src/*.h
