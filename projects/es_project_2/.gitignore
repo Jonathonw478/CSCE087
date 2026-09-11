@@ -1,0 +1,11 @@
+*
+!*/
+!.gitignore
+!hardware/constraints/*.xdc
+!hardware/ipi_bds/design_1/*.bd
+!hardware/ipi_bds/design_1/hdl/*.vhd
+!hardware/ipi_bds/design_1/hdl/*.v
+!hardware/work_dir/*.tcl
+!software/imported_hardware/*.xsa
+!software/hello_world/src/*.c
+!software/hello_world/src/*.h
