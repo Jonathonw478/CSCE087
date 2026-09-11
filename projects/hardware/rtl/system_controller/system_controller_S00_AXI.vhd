@@ -143,6 +143,8 @@ architecture arch_imp of system_controller_S00_AXI is
 	signal aw_en	: std_logic;
 	
 	signal reg0_0_d1, reg0_0_d2:std_logic; 
+	
+    signal free_counter : std_logic_vector(31 downto 0) := (others => '0');
 
 begin
 	-- I/O Connections assignments
@@ -183,6 +185,14 @@ begin
 	    end if;
 	  end if;
 	end process;
+	
+	-- Counter for each rising clock edge on the AXI clock
+	process(S_AXI_ACLK)
+    begin
+      if rising_edge(S_AXI_ACLK) then
+        free_counter <= std_logic_vector(unsigned(free_counter) + 1);
+      end if;
+    end process;
 
 	-- Implement axi_awaddr latching
 	-- This process is used to latch the address when both 
@@ -412,7 +422,7 @@ begin
 	-- and the slave is ready to accept the read address.
 	slv_reg_rden <= axi_arready and S_AXI_ARVALID and (not axi_rvalid) ;
 
-	process (slv_reg0, slv_reg1, slv_reg2, slv_reg3, slv_reg4, slv_reg5, slv_reg6, slv_reg7, axi_araddr, S_AXI_ARESETN, slv_reg_rden)
+	process (slv_reg0, slv_reg1, slv_reg2, slv_reg3, slv_reg4, slv_reg5, slv_reg6, slv_reg7, axi_araddr, S_AXI_ARESETN, slv_reg_rden, free_counter)
 	variable loc_addr :std_logic_vector(OPT_MEM_ADDR_BITS downto 0);
 	begin
 	    -- Address decoding for reading registers
@@ -428,7 +438,7 @@ begin
 	      when b"011" =>
 	        reg_data_out <= slv_reg3;
 	      when b"100" =>
-	        reg_data_out <= slv_reg4;
+	        reg_data_out <= free_counter;
 	      when b"101" =>
 	        reg_data_out <= slv_reg5;
 	      when b"110" =>
